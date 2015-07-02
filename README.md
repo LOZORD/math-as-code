@@ -37,6 +37,7 @@ For simplicity, many of the code examples here operate on floating point values 
   - [piecewise function](#piecewise-function)
 - [prime `′`](#prime)
 - [quantifiers `∀` `∃` `¬`](#quantifiers)
+- [sets](#sets)
 - [more...](#more)
 
 ## variable naming conventions
@@ -656,6 +657,48 @@ function forSome(setOfThings, predicate) {
 }
 
 //"Not" or "negation" -> just use good old `!`
+```
+
+## sets
+
+Sets are collections of elements (usually of the same type). The two main properties of sets is that they
+
+* Only contain unique elements
+* Have no inherent ordering
+
+E.g. (TODO make LaTeX)
+`{1,2,3} = {1,1,2,3} = {1,2,3,3,3}`
+`{1,2,3} = {1,3,2} = {2,2,1,1,1,3}`
+
+ES6 implements a Set (discuss)
+
+```js
+Set.prototype.union = function(other) {
+  if (!(other instanceof Set)) {
+    throw new TypeError('Argument should be a Set')
+  }
+
+  let lhsArr = Array.from(this)
+  let rhsArr = Array.from(other)
+
+  return new Set(lhsArr.concat(rhsArr))
+}
+
+Set.prototype.intersect = function(other) {
+  if (!(other instanceof Set)) {
+    throw new TypeError('Argument should be a Set')
+  }
+
+  let lhsArr = Array.from(this)
+  let rhsArr = Array.from(other)
+
+  let intersection = lhsArr.filter(function(lhsElem) {
+    return rhsArr.has(lhsElem)
+  })
+
+  return new Set(intersection)
+}
+
 ```
 
 ## more...
